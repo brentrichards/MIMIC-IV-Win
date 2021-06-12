@@ -14,7 +14,8 @@ If you are creating a VM to specifically host this, a few considerations.
 4. Temporary separate storage for the source files is useful when building the datasets. 
 5. Postgres processing is predominantly a few threads only, so a smaller number of CPU cores will work fine.
 
-#Install Postgres
+## Install Postgres
+The inital instructions from here work fine (https://www.programmersought.com/article/21858700192/ ). Version 13 works with MIMIC, and the included version of PGAdmin also. 
 
-
-#Install 7-Zip
+## Install 7-Zip
+next install 7-zip (https://www.7-zip.org/) (this works fine with the supplied compressed MIMIC files). As per the link above, make sure you keep a note of the installation directory, and then add the path to you environment variables (in the Windows search box type 'environment', 'edit system variables', click on 'environment variables', clikc on 'path', click on 'edit' and add the pathe for 7-zip.
