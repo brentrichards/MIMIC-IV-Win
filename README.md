@@ -15,7 +15,11 @@ If you are creating a VM to specifically host this, a few considerations.
 5. Postgres processing is predominantly a few threads only, so a smaller number of CPU cores will work fine.
 
 ## Install Postgres
-The inital instructions from here work fine (https://www.programmersought.com/article/21858700192/ ). Version 13 works with MIMIC, and the included version of PGAdmin also. 
+And standard installation is all you need, and thus the inital instructions from here work fine (https://www.programmersought.com/article/21858700192/ ). Version 13 works with MIMIC IV, and the included version of PGAdmin also. 
 
 ## Install 7-Zip
 next install 7-zip (https://www.7-zip.org/) (this works fine with the supplied compressed MIMIC files). As per the link above, make sure you keep a note of the installation directory, and then add the path to you environment variables (in the Windows search box type 'environment', 'edit system variables', click on 'environment variables', clikc on 'path', click on 'edit' and add the pathe for 7-zip.
+
+## Download the MIMIC files.
+Note that these are fairly large files (around 7Gb total), so you will need both space to store them, and bandwidth. Even with good Cloud connections the download speeds are not high.
+IF you go to the MIMIC IV paper on physionet (https://physionet.org/content/mimiciv/1.0/) and log in to your account, you will find a link at the bottom to download the ZIP file (https://physionet.org/content/mimiciv/get-zip/1.0/). When finished downloading, unzip it in a directory that is easy to find, and with a short file path (to decrease typing and chance of errors!). Placing it on a separate drive to Postgres will help database load times. 
