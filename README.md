@@ -45,7 +45,10 @@ The basic sequence is:
 12. Well done!
 
 # Using the Concepts
-The concepts included in the normal downloads (https://github.com/MIT-LCP/mimic-iv) are a series of SQL files that have been written to help with some of the more standard questions - e.g. use of vasopressors or antibiotics. These have been brought together from a number of sources, so not all the SQL code works within Postgres (yes there are different 'dialects' of SQL). 
+The concepts included in the normal downloads (https://github.com/MIT-LCP/mimic-iv) are a series of SQL files that have been written to help with some of the more standard questions - e.g. use of vasopressors or antibiotics. These have been brought together from a number of sources, so not all the SQL code works within Postgres (yes, there are different 'dialects' of SQL). 
 Also, a number of these files reference 'mimic_derived' - a database written from the original MIMIC that included many of the queries, to allow secondary and tertiary queries to occur of the dataset. The MIMIC-derived dataset is not available for MIMIC-IV. However, the functionality can be reporduced by using materialised views within MIMIC IV, and I have included the code in this repo (in fact the main reason for this repo). 
 Note that given that some of the views build on other views, it is important to run these initially in order. Once these views are created, you can then go back to the primary SQL queries and run these, along with modifications as you wish.
 I have chosen to use materialised views as some of the base queries take 10-20 min to run - so better in a view. Given that MIMIC is often accessed in a time-limited environment (datathon), the time saving can be significant.
+
+All of these queries have been tested and run within a local instance of Postgres 13, using PGAdmin, on a Windows machine, so hopefully these all work for you also.
+
