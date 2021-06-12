@@ -39,7 +39,7 @@ The basic sequence is:
 6. set to stop on error (\set ON_ERROR_STOP 1) 
 7. set the direcotry where your compressed mimic files are stored (\set mimic_data_dir 'E:/postgres/MIMICIV') - this directory is referenced in the build sql files. Make sure that you change this to where your files are stored. Note that it is also important that you keep the original sub-directory structure of the downloaded zip file containing the MIMIC data files.
 8. now build the database (\i E:/postgres/load_7z.sql) - again make sure you have the right directory for your files here. 
-9. Wait...... It takes 1.5-2 hours, depending on your computer and drive speed. Some tables take >20min to build  - chartevents has over 300 million rows, so understandable. There are 27 tables to build. You will be returned to the command line
+9. Wait...... It takes 1.5-2 hours, depending on your computer and drive speed. Some tables take >20min to build  - chartevents has over 300 million rows, so understandable. There are 27 tables to build. You will be returned to the command line when build is complete.
 10. Now build the indexes (\i E:/postgres/index.sql). Again this will take considerable time - 20-30 min.
 11. Once completed, close the SQL window, open PGAdmin, log in to the database, and check everything is there. To check it is working, simply right-click on any of the tables, and look at the top 100 rows (it will create a simple SELECT statement). 
 12. Well done!
