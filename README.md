@@ -1,4 +1,4 @@
-# MIMIC4-Win - installations
+# MIMIC IV-Windows - installations
 
 This is a repository to install MIMIC 4 in PostgreSQL a Windows environment, and then add materialised views of common SQL searches.
 The first part is reasonably straight forward, and is covered in various detail on other pages, which will be linked. 
