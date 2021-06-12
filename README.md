@@ -29,3 +29,23 @@ You will also need the MIMIC IV files from Github, linked here https://github.co
 
 ## Build the database
 This is often seen as the confusing part, as it needs some command line work. However if you use the SQL shell/command box, it becomes somewhat more straight forward. 
+Then follwo the instructions here https://www.programmersought.com/article/97578529676/ - copy and paste in to the SQL shell, careful to follow the sequence. 
+The basic sequence is:
+1. log in to the server (accept the default by simply pressing 'enter' until asked for the password, then 'postgres' as above if you have kept this
+2. create the database, and switch to it (CREATE DATABASE mimic OWNER postgres;) (\c mimic;)
+3. create a schema to get started (CREATE SCHEMA mimiciv;) - you will use this later when building the materialised views
+4. set a search path (set search_path to mimiciv;)  - note you will need to repeat this if you get stuck and log out.
+5. create the tables and schema (\i E:/postgres/create.sql) - make sure this is the correct directory for you
+6. set to stop on error (\set ON_ERROR_STOP 1) 
+7. set the direcotry where your compressed mimic files are stored (\set mimic_data_dir 'E:/postgres/MIMICIV') - this directory is referenced in the build sql files. Make sure that you change this to where your files are stored. Note that it is also important that you keep the original sub-directory structure of the downloaded zip file containing the MIMIC data files.
+8. now build the database (\i E:/postgres/load_7z.sql) - again make sure you have the right directory for your files here. 
+9. Wait...... It takes 1.5-2 hours, depending on your computer and drive speed. Some tables take >20min to build  - chartevents has over 300 million rows, so understandable. There are 27 tables to build. You will be returned to the command line
+10. Now build the indexes (\i E:/postgres/index.sql). Again this will take considerable time - 20-30 min.
+11. Once completed, close the SQL window, open PGAdmin, log in to the database, and check everything is there. To check it is working, simply right-click on any of the tables, and look at the top 100 rows (it will create a simple SELECT statement). 
+12. Well done!
+
+# Using the Concepts
+The concepts included in the normal downloads (https://github.com/MIT-LCP/mimic-iv) are a series of SQL files that have been written to help with some of the more standard questions - e.g. use of vasopressors or antibiotics. These have been brought together from a number of sources, so not all the SQL code works within Postgres (yes there are different 'dialects' of SQL). 
+Also, a number of these files reference 'mimic_derived' - a database written from the original MIMIC that included many of the queries, to allow secondary and tertiary queries to occur of the dataset. The MIMIC-derived dataset is not available for MIMIC-IV. However, the functionality can be reporduced by using materialised views within MIMIC IV, and I have included the code in this repo (in fact the main reason for this repo). 
+Note that given that some of the views build on other views, it is important to run these initially in order. Once these views are created, you can then go back to the primary SQL queries and run these, along with modifications as you wish.
+I have chosen to use materialised views as some of the base queries take 10-20 min to run - so better in a view. Given that MIMIC is often accessed in a time-limited environment (datathon), the time saving can be significant.
