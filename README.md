@@ -15,7 +15,7 @@ If you are creating a VM to specifically host this, a few considerations.
 5. Postgres processing is predominantly a few threads only, so a smaller number of CPU cores will work fine.
 
 ## Install Postgres
-And standard installation is all you need, and thus the inital instructions from here work fine (https://www.programmersought.com/article/21858700192/ ). Version 13 works with MIMIC IV, and the included version of PGAdmin also. 
+And standard installation is all you need, and thus the initial instructions from here work fine (https://www.programmersought.com/article/21858700192/ ). Version 13 works with MIMIC IV, and the included version of PGAdmin also. 
 Make sure you remember the Postgres username and password. Sticking with the usual defaults ('postgres' as user, 'postgres' as password) is OK in the Windows environment (and less likely to be forgotten). When you first open PGAdmin you will be asked for this master password.  
 
 ## Install 7-Zip
