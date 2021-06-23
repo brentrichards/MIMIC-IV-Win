@@ -9,17 +9,17 @@ I have then altered the SQL code to work natively within PGAdmin, to completely 
 ## VM considerations
 If you are creating a VM to specifically host this, a few considerations. 
 1. If you place the full database is on the primary disk, you will need more than the usual 128gb of storage. You can do this initially when creating the drive, or add additional space (which in some VMs needs to be manually connected to the primary partition - go in to disk management and click on primary partition and select 'expand'). 
-2. Separating data and processing drives is often considered good practice, however for this may only provide a small advantage, with a concommitant increase in complexity. It works fine all hosted on a single disk.
-3. You will note when creating both the database and the materialized views there is often 100% disk utilisation - so ensure you have good qualilty SSDs.
+2. Separating data and processing drives is often considered good practice, however for this may only provide a small advantage, with a concomitant increase in complexity. It works fine all hosted on a single disk.
+3. You will note when creating both the database and the materialized views there is often 100% disk utilisation - so ensure you have good quality SSDs.
 4. Temporary separate storage for the source files is useful when building the datasets. 
 5. Postgres processing is predominantly a few threads only, so a smaller number of CPU cores will work fine.
 
 ## Install Postgres
-And standard installation is all you need, and thus the inital instructions from here work fine (https://www.programmersought.com/article/21858700192/ ). Version 13 works with MIMIC IV, and the included version of PGAdmin also. 
+And standard installation is all you need, and thus the initial instructions from here work fine (https://www.programmersought.com/article/21858700192/ ). Version 13 works with MIMIC IV, and the included version of PGAdmin also. 
 Make sure you remember the Postgres username and password. Sticking with the usual defaults ('postgres' as user, 'postgres' as password) is OK in the Windows environment (and less likely to be forgotten). When you first open PGAdmin you will be asked for this master password.  
 
 ## Install 7-Zip
-next install 7-zip (https://www.7-zip.org/) (this works fine with the supplied compressed MIMIC files). As per the link above, make sure you keep a note of the installation directory, and then add the path to you environment variables (in the Windows search box type 'environment', 'edit system variables', click on 'environment variables', clikc on 'path', click on 'edit' and add the pathe for 7-zip.
+next install 7-zip (https://www.7-zip.org/) (this works fine with the supplied compressed MIMIC files). As per the link above, make sure you keep a note of the installation directory, and then add the path to you environment variables (in the Windows search box type 'environment', 'edit system variables', click on 'environment variables', click on 'path', click on 'edit' and add the path for 7-zip.
 It is worth checking the path has been registered before you start installing the database. Simply open a command window (Cmd) and type 7z - you should get a series of instructions about 7-zip.
 
 ## Download the MIMIC files.
@@ -46,9 +46,15 @@ The basic sequence is:
 
 # Using the Concepts
 The concepts included in the normal downloads (https://github.com/MIT-LCP/mimic-iv) are a series of SQL files that have been written to help with some of the more standard questions - e.g. use of vasopressors or antibiotics. These have been brought together from a number of sources, so not all the SQL code works within Postgres (yes, there are different 'dialects' of SQL). 
-Also, a number of these files reference 'mimic_derived' - a database written from the original MIMIC that included many of the queries, to allow secondary and tertiary queries to occur of the dataset. The MIMIC-derived dataset is not available for MIMIC-IV. However, the functionality can be reporduced by using materialised views within MIMIC IV, and I have included the code in this repo (in fact the main reason for this repo). 
+Also, a number of these files reference 'mimic_derived' - a database written from the original MIMIC that included many of the queries, to allow secondary and tertiary queries to occur of the dataset. The MIMIC-derived dataset is not available for MIMIC-IV. However, the functionality can be reproduced by using materialised views within MIMIC IV, and I have included the code in this repo (in fact the main reason for this repo). 
 Note that given that some of the views build on other views, it is important to run these initially in order. Once these views are created, you can then go back to the primary SQL queries and run these, along with modifications as you wish.
 I have chosen to use materialised views as some of the base queries take 10-20 min to run - so better in a view. Given that MIMIC is often accessed in a time-limited environment (datathon), the time saving can be significant.
+The order for the materialized views is:
+- first group:
+- second group:
+- third group:
 
 All of these queries have been tested and run within a local instance of Postgres 13, using PGAdmin, on a Windows machine, so hopefully these all work for you also.
+
+Note that there are still a few queries that I have not managed to translate across, namely 
 
