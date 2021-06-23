@@ -49,12 +49,12 @@ The concepts included in the normal downloads (https://github.com/MIT-LCP/mimic-
 Also, a number of these files reference 'mimic_derived' - a database written from the original MIMIC that included many of the queries, to allow secondary and tertiary queries to occur of the dataset. The MIMIC-derived dataset is not available for MIMIC-IV. However, the functionality can be reproduced by using materialised views within MIMIC IV, and I have included the code in this repo (in fact the main reason for this repo). 
 Note that given that some of the views build on other views, it is important to run these initially in order. Once these views are created, you can then go back to the primary SQL queries and run these, along with modifications as you wish.
 I have chosen to use materialised views as some of the base queries take 10-20 min to run - so better in a view. Given that MIMIC is often accessed in a time-limited environment (datathon), the time saving can be significant.
+
 The order for the materialized views is:
-- first group:
-- second group:
-- third group:
+- first group:Age_mv, antibiotics_mv, bg_mv, bg_pg_mv, blood_differential_mv, chemistry_mv, Coagulation_mv, complete_blood_count_mv, dobutamine_mv, dopamine_mv, enzyme_mv,Epinephrine_mv, gcs_mv, height_mv, icu_times_mv, kdigo_creatinine_mv, norepinephrine_mv, Oxygen_delivery_mv, rrt_mv, urine_output_mv, ventilator_setting_mv, vital_sign_mv, weight_durations_mv
+- second group:First_day_bg_art_mv, First_day_gcs_mv, first-day_lab_mv, first_day_rrt_mv, first_day_urine_output_mv, first_day_vitalsign_mv, kdigo_uo_mv, urine_output_rate_mv, ventilation_mv 
 
 All of these queries have been tested and run within a local instance of Postgres 13, using PGAdmin, on a Windows machine, so hopefully these all work for you also.
 
-Note that there are still a few queries that I have not managed to translate across, namely 
+Note that there are still a few queries that I have not managed to translate across, namely icu_stay_hourly, sofa (that relies on it), and sepsis3 (that relies on sofa). 
 
